@@ -190,10 +190,14 @@ fn remove(path: &Path, args: &Vec<String>)
         current_index += 1;
     }
 
+    let mut newline: [u8; 1] = [0];
+    '\n'.encode_utf8(&mut newline);
+
     let mut file: File = File::create(path).expect("Error: Failed to remove item from Todo!");
     for item in line_vector
     {
         file.write_all(item.as_bytes()).expect("Error: Failed to reconstruct Todo!");
+        file.write_all(&newline).expect("Error: Failed to add item to Todo!");
     }
 }
 
