@@ -1,4 +1,6 @@
-use std::{ffi::OsStr, fmt::Display, fs::DirEntry, io::Write, path::PathBuf};
+use std::{fmt::Display, io::Write, path::PathBuf};
+
+const HELP_TEXT: &'static str = include_str!("../help.txt");
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 struct Note {
@@ -179,14 +181,28 @@ fn main() {
     match arg_strs[..] {
         ["list" | "-l", ref args @ ..] => list(args),
         ["note" | "-n", ref args @ ..] => note(args),
-        _ => (),
+        ["help" | "-h", ref args @ ..] => help(args),
+        _ => help(&[]),
     };
+}
+
+fn help(args: &[&str]) {
+    help_default()
+    // match args {
+    //     ["list" | "-l", ..] => (), // help list desc
+    //     ["note" | "-n", ..] => (), // help note desc
+    //     _ => help_default(),       // Default Help
+    // }
+}
+
+fn help_default() {
+    println!("{}", HELP_TEXT)
 }
 
 fn note(args: &[&str]) {
     match args {
         ["add", list_name, note @ ..] => note_add(list_name, note),
-        ["remove", list_name, note_indices @ ..] => note_remove(list_name, note_indices),
+        ["del", list_name, note_indices @ ..] => note_remove(list_name, note_indices),
         ["check", list_name, note_indices @ ..] => note_check(list_name, note_indices),
         ["uncheck", list_name, note_indices @ ..] => note_uncheck(list_name, note_indices),
         _ => (),
@@ -373,7 +389,7 @@ fn list(args: &[&str]) {
         ["new", name] => list_new(name),
         ["del", name] => list_del(name),
         ["read", name] => list_read(name),
-        [inv, ..] => println!("Invalid command: {}", inv),
+        [_, ..] => help_default(),
     };
 }
 

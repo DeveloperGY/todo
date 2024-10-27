@@ -1,0 +1,48 @@
+todo list | -l
+    Modifies the register of lists, printing the list of todo lists
+    if no arguments are passed
+
+    new <name>
+      Creates a new todo list at $XDG_DATA_HOME/fp_todo/<name>.todo
+
+    del <name>
+      Deletes a todo list at $XDG_DATA_HOME/fp_todo/<name>.todo
+
+    read <name>
+      Outputs the notes on todo list at $XDG_DATA_HOME/fp_todo/<name>.todo
+
+todo note | -n
+    Modifies notes in a todo list
+
+    add <name> <text...>
+      Adds a note to the list at $XDG_DATA_HOME/fp_todo/<name>.todo
+      with a description given in the text argument
+
+    del <name> option=<checked|unchecked|all|note_nums...>
+      Deletes notes in the list at $XDG_DATA_HOME/fp_todo/<name>.todo
+      given the value of option
+      
+      option = "checked"
+        All checked notes
+
+      option = "unchecked"
+        All unchecked notes
+
+      option = "all"
+        All notes
+      
+      option = note_nums...
+        All notes identified by number in the note_nums list
+        ex. todo note del example_list 1 3 5
+          deletes notes 1, 3, and 5 from example_list.todo
+
+    check <name> option=<checked|unchecked|all|note_nums...>
+      Checks notes in the list at $XDG_DATA_HOME/fp_todo/<name>.todo
+      given the value of option (see the description of different
+      values of option above)
+
+    uncheck <name> option=<checked|unchecked|all|note_nums...>
+      same as check, only it unchecks the notes instead
+
+todo help | -h
+    outputs this text
