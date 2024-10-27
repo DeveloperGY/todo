@@ -18,14 +18,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "fp_todo"
-version = "0.1.0"
-dependencies = [
- "ron",
- "serde",
-]
-
-[[package]]
 name = "proc-macro2"
 version = "1.0.89"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -84,6 +76,14 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
+]
+
+[[package]]
+name = "todo"
+version = "0.1.0"
+dependencies = [
+ "ron",
+ "serde",
 ]
 
 [[package]]
